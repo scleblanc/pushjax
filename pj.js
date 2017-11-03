@@ -3,7 +3,7 @@ function pushjax(
 		renderFunction = function (content, $elem)
 		{	
 			$elem.fadeOut(function(){
-				$(this).empty().append(content.html()).fadeIn();
+				$(this).empty().append(content).fadeIn();
 			})
 		}
 
@@ -26,7 +26,7 @@ function pushjax(
 				url: url,
 				type: 'get',
 				success: function(result){
-					prefetch = $(result).filter(_container);
+					prefetch = $(result).filter(_container).html();
 					ajax = false;
 				}
 			});
@@ -75,7 +75,7 @@ function pushjax(
 			url: event.state.url,
 			type: 'get',
 			success: function(result){
-				result = $(result).filter(_container)
+				result = $(result).filter(_container).html();
 				ajax = false;
 				loadIn(result, event.state.url, 1);
 			}
@@ -84,8 +84,21 @@ function pushjax(
 }
 
 $(function(){
-	//render = function(content, $elem){ $elem.empty().append(content) }
-	//pushjax('main', render);
 
-	pushjax('main');
+	// default
+	// pushjax('main');
+
+	// custom render
+	render = function(content, $elem){ 
+		$elem
+		.addClass('out')
+		.delay(200) 
+		.queue(function(next){
+			$(this).empty().append(content);
+			$(this).removeClass('out');
+			next();
+		})
+	}
+	$('#main').css('transition', '600ms all');
+	pushjax('main', render);
 })
