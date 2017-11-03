@@ -92,7 +92,7 @@ $(function(){
 	render = function(content, $elem){ 
 		$elem
 		.addClass('out')
-		.delay(200) 
+		.delay(300) 
 		.queue(function(next){
 			$(this).empty().append(content);
 			$(this).removeClass('out');
