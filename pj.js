@@ -1,13 +1,13 @@
 function pushjax(
-			container,
-			renderFunction = function (content, $elem)
-								{	
-									$elem.fadeOut(function(){
-										$(this).empty().append(content).fadeIn();
-									})
-								}
+		container,
+		renderFunction = function (content, $elem)
+		{	
+			$elem.fadeOut(function(){
+				$(this).empty().append(content).fadeIn();
+			})
+		}
 
-			){
+	){
 
 	_container = '#'+container;
 
