@@ -3,7 +3,7 @@ function pushjax(
 		renderFunction = function (content, $elem)
 		{	
 			$elem.fadeOut(function(){
-				$(this).empty().append(content).fadeIn();
+				$(this).empty().append(content.html()).fadeIn();
 			})
 		}
 
@@ -84,6 +84,8 @@ function pushjax(
 }
 
 $(function(){
-	render = function(content, $elem){ $elem.empty().append(content) }
-	pushjax('main', render);
+	//render = function(content, $elem){ $elem.empty().append(content) }
+	//pushjax('main', render);
+
+	pushjax('main');
 })
