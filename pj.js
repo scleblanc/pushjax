@@ -1,9 +1,11 @@
 function pushjax(
 		container,
-		renderFunction = function (content, $elem)
+		renderFunction = function (content, $elem, callback)
 		{	
 			$elem.fadeOut(function(){
-				$(this).empty().append(content).fadeIn();
+				$(this).empty().append(content).fadeIn(function(){
+					callback();
+				});
 			})
 		}
 
@@ -27,6 +29,9 @@ function pushjax(
 				type: 'get',
 				success: function(result){
 					prefetch = $(result).filter(_container).html();
+					if (prefetch == undefined) {
+						prefetch = $(result).find(_container).html();
+					}
 					ajax = false;
 				}
 			});
@@ -60,7 +65,7 @@ function pushjax(
 			history.pushState({'url':url}, null, url);
 		}
 		console.log(history.state);
-		renderFunction(content, $(_container));
+		renderFunction(content, $(_container), registerEvents);
 	}
 
 	var prefetch = '';
@@ -75,9 +80,13 @@ function pushjax(
 			url: event.state.url,
 			type: 'get',
 			success: function(result){
-				result = $(result).filter(_container).html();
+				fetched = $(result).filter(_container).html();
+				if (fetched == undefined) {
+					fetched = $(result).find(_container).html();
+				}
+				console.log(fetched);
 				ajax = false;
-				loadIn(result, event.state.url, 1);
+				loadIn(fetched, event.state.url, 1);
 			}
 		});
 	};
@@ -89,13 +98,14 @@ $(function(){
 	// pushjax('main');
 
 	// custom render
-	render = function(content, $elem){ 
+	render = function(content, $elem, callback){ 
 		$elem
 		.addClass('out')
 		.delay(300) 
 		.queue(function(next){
 			$(this).empty().append(content);
 			$(this).removeClass('out');
+			callback();
 			next();
 		})
 	}
