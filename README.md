@@ -13,7 +13,9 @@ A simple example of pushState and Ajax.
 It takes three parameters, `content`, `$elem`, and `callback`.
 
 `content` will be the content retrieved from an ajax request.
+
 `$elem` will be a jQuery object representing the container element.
+
 `callback` will be the function that re-registers the hover/click events.
 
 The default render function is:
