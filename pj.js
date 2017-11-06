@@ -95,20 +95,24 @@ function pushjax(
 $(function(){
 
 	// default
-	// pushjax('main');
+	pushjax('main');
 
-	// custom render
-	render = function(content, $elem, callback){ 
-		$elem
-		.addClass('out')
-		.delay(300) 
-		.queue(function(next){
-			$(this).empty().append(content);
-			$(this).removeClass('out');
-			callback();
-			next();
-		})
-	}
-	$('#main').css('transition', '600ms all');
-	pushjax('main', render);
+	// simple render
+	//render = function(content, $elem, callback){ $elem.empty().append(content);callback(); }
+	//pushjax('main', render);
+
+	// fancy render
+	// render = function(content, $elem, callback){ 
+	// 	$elem
+	// 	.addClass('out')
+	// 	.delay(300) 
+	// 	.queue(function(next){
+	// 		$(this).empty().append(content);
+	// 		$(this).removeClass('out');
+	// 		callback();
+	// 		next();
+	// 	})
+	// }
+	// $('#main').css('transition', '600ms all');
+	// pushjax('main', render);
 })
