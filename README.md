@@ -4,7 +4,7 @@ A simple example of pushState and Ajax.
 
 ## Usage
 
-`pushjax('id', renderFunction)`
+`pushjax('id', [renderFunction])`
 
 `id` is the id of the element to inject content into, and to pull content from on ajax requests.
 
